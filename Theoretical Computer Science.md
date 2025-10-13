@@ -6,7 +6,6 @@ Alphabet $\Sigma$
 ![[Pasted image 20250923161419.png]]
 
 les états finaux sont décidés à l'avance et si on "tombe" à la fin de la chaîne dans un autre état on considère que la chaîne est rejetée.
-
 #### Finite Automata Déterministe (DFA)
 
 La fonction de transition donne exactement un state de destination pour chaque symbole d'entrée (déterministe)
@@ -14,26 +13,31 @@ La fonction de transition donne exactement un state de destination pour chaque s
 mais on peut aussi avoir... 
 $arrow$ fonction de transition **partielle** : certains symboles ne pointent vers rien
 $arrow$ fonction de transition **non-déterministe** : certains symboles pointent vers deux states
-
 #### Finite Automata Non-Déterministe (NFA)
 
 La différence entre un automate **déterministe** et **non-déterministe** est que la fonction de transition est $delta : Q times Sigma arrow cal(P) (Q)$ où $cal(P) (Q)$ est le power-set de l'ensemble des states $Q$.
 
 L'automata non déterministe va tester en parallèle toutes les possibilités jusqu'à trouver une suite d'état qui donne un état final. Dans ce cours, on parle d'**angelic** non-determinism, donc on regarde si **au moins une** des suites d'état arrive à un état final.
-
-#### DFA = NFA
+#### DFA $equiv$ NFA
 
 Chaque automate non déterministe peut être transformé en automate déterministe (et vice-versa mais c'est beaucoup plus simple). 
 
-Au lieu de fonctionner avec l'ensemble des states $Q$, on utilise le power-set des states $Q$, $cal(P) (Q)$. Au début on part de l'ensemble des states de départ, puis à chaque fois on rajoute l'ensemble des states sur lesquels on pourrait être d'une façon ou d'une autre (c'est le **subset construction**).
+Au lieu de fonctionner avec l'ensemble des states $Q$, on utilise le power-set des states $Q$, $cal(P) (Q)$. Au début on part de l'ensemble des states de départ, puis à chaque fois on rajoute l'ensemble des states sur lesquels on pourrait être d'une façon ou d'une autre (**subset construction**).
 
 ![[Pasted image 20250923173253.png|384x271]]
 
 $epsilon$ est la chaîne vide. on appelle les transitions $q_x arrow_epsilon q_y$ des silent moves.
 
-$E(q)$ ($epsilon$-closure) sont l'ensemble des states atteignables par depuis $q$ par des silent moves.
-on a donc comme fonction de transition :
-$$ delta_D (S, a) = E ( union_(s in S) " " delta_A (s, a)) $$
+Soit $A = (Q_A, \Sigma, \delta_A, q_0, F_A)$ la machine non-déterministe **NFA**, et $q \in Q_A$ un état de $A$.
+$E(q)$ (ou $epsilon$–closure de $q$) = ensemble des états atteignables depuis $q$ par des transitions $epsilon$.
+
+On construit le **DFA** $D = (Q_D, \Sigma, \delta_D, q_0’, F_D)$.
+- $Q_D = \mathcal{P}(Q_A)$
+- $q_0’ = E(q_0)$
+- états finaux : $F_D = \{ S \subseteq Q_A \mid S \cap F_A \neq \emptyset \}$
+- fonction de transition $\boxed{\delta_D(S, a) = E\left( \bigcup_{s \in S} \delta_A(s, a) \right)}$
+
+Idée : à partir de l’ensemble d’états S (un état du DFA), quand on lit le symbole a, on regarde  **toutes les transitions possibles** dans le NFA à partir de **chacun des états de** S, on regroupe ces destinations (union), puis on ajoute tous les états atteignables via des ε-transitions (ε-closure). C'est pour ça qu'on entoure tout avec un $E$ final.
 ### Propriétés des langages
 
 - les langages **réguliers** sont ceux qui peuvent être exprimés avec des DFA, NFA et $epsilon$-NFA
