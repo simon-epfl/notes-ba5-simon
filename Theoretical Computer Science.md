@@ -119,12 +119,17 @@ Lemma : $L$ régulier implique $dot backslash L$ régulier.
 Soit un langage $L subset.eq Sigma^*$ et $x, y in Sigma^*$. S'il existe une chaîne suffixe $z$ telle que :
 - $x z in L$
 - $y z in.not L$
-alors on dit que $x$ et $y$ sont **distinguishable** par $L$.
+alors on dit que $x$ et $y$ sont **distinguables** par $L$.
 
-Si $x$ et $y$ ne sont pas distinguables par $L$, on dit que que $x equiv_L y$. C'est une **relation d'équivalence.**
+Si $x$ et $y$ ne sont **pas distinguables** par $L$, on dit que que $x equiv_L y$.
+C'est une **relation d'équivalence.**
 
 **Myhill-Nerode Theorem** : un langage $L$ est régulier si et seulement si le nombre de classes d'équivalence $equiv_L$ est fini.
 
+> [!tip]
+> Si le nombre de classes d'équivalence est infini, on montre que L n'est pas régulier. 
+> Ainsi, on trouve une **infinité de préfixes** $(x_0, x_1, x_2, \dots)$ qui sont **tous distinguables entre eux** par _au moins un suffixe_ approprié, autrement dit :
+> Il faut montrer qu’il existe une infinité de chaînes $(u_i)$ telles que pour tout couple $(i \neq j)$,on peut trouver un suffixe $(w_{i j})$ qui sépare $(u_i)$ et $(u_j)$.
 #### Context free languages
 
 Une **context free grammar** (CFG) est un 4-tuple ($N, Sigma, P, S$) où :
