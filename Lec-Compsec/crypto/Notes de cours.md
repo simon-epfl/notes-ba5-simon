@@ -1,4 +1,3 @@
-
 ## Symmetric encryption
 
 **Perfect secrecy:** $|P(E(k, m_1) = c) - P(E(k, m_2) = c)| <= epsilon$
