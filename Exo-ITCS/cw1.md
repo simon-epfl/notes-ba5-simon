@@ -102,7 +102,33 @@ In lectures, we considered the Halting Problem H, the Looping Problem L, and the
 
 **Show, by reduction from L, that UL is undecidable.**
 
-On construit une machine $M prime$ qui ignore son input, écrit $w$ sur le tape et appelle $M$. Si $M$ loop sur $w$, alors $M prime$ loop sur tous les inputs aussi.
+On construit une machine $M prime$ qui ignore son input, écrit $w$ sur le tape et appelle $M$. Si $M$ loop sur $w$, alors $M prime$ loop sur tous les inputs aussi. Et on ne sait pas du tout si $M$ loop sur $w$, c'est le problème d'origine.
 
 **Show, by constructing a suitable machine, that UL is co-semi-decidable. (Hint: interleaving.)**
 
+On construit une machine qui appelle en parallèle `M` tous les inputs R.
+Si au moins un des inputs répond non, alors la machine répond non.
+
+(interleaving c'est faire avancer toutes les machines créées jusqu'ici d'une step en même temps).
+
+
+We often want to know whether a program, or even just a function/method in a program, correctly implements its specification. Can we write programs to check this? Recall that we say a machine computes a function f if, when started with n in R0, it halts with f (n) in R0. Take f to be the factorial function f (n) = n!. Let the decision problem Fac be the (codes of) the register machines that compute f .
+
+**Construct a reduction from H to Fac, and so show that Fac is undecidable.**
+
+Posons une machine "FAC" qui calcule la factorielle. 
+Posons une machine M qui s'arrête si le programme "FAC" calcule bien la factorielle ou run forever sinon.
+
+on veut :
+
+résoudre le problème **est-ce que le programme F halts ?**
+<=>
+résoudre le problème **est-ce que "FAC" calcule la factorielle**
+
+alors construisons F tel qu'il ignore son input, lance **FAC** sur **w** et s'arrête si **FAC** renvoie le bon résultat.
+
+Construisons une machine "FAC" qui :
+- prend en paramètre $n$
+- simule $M$ sur $w$, et:
+	-  si elle s'arrête, calcule $n!$
+	- si elle ne s'arrête pas, et elle ne s'arrête pas non plus

@@ -1,3 +1,15 @@
+### Résumé méthodes
+
+#### Context-free
+
+> [!tip] Montrer qu'un langage est context-free ?
+> 
+> 1. Montrer qu'il est régulier.
+> 2. Ou montrer qu'il existe une context-free grammar (rules, variables, terminals) qui le construire.
+> 3. Ou montrer qu'il existe un push down automata pour le construire.
+
+> [!tip] Montrer qu'un langage n'est **pas** context-free ?
+
 ### Finite Automata
 
 Language : toutes les chaînes que l'automate A valide $\cal{L} (A)$
@@ -305,8 +317,10 @@ Supposons que tu as deux problèmes :
 Tu veux savoir si **P₂** est aussi difficile que **P₁**.  
 Pour cela, tu construis une **machine** (ou une fonction) qui transforme _toute instance_ de **P₁** en une _instance équivalente_ de **P₂**. Résoudre P₂ te permettrait de résoudre P₁, **car tu peux transformer un cas de P₁ en un cas de P₂**.
 
-C’est ça, une **réduction**.  
+C’est ça, une **réduction**.
 Et quand cette transformation est calculable par une machine de Turing (TM ou RM), on parle de **mapping reduction (ou many-one reduction)**.
+
+![[image-20.png]]
 
 ##### Rice's theorem
 
@@ -320,4 +334,31 @@ Par exemple : $"Three"_"TM" = {<M>, "M is a TM and " |L(M)| <= 3}$
 
 - vérifier que c'est une propriété des TMs. si on a $L(M_1) = L(M_2)$, alors soit les deux appartiennent à Three ou aucune des deux. C'est donc une propriété des TMs. ✅
 - est-ce que cette propriété est non triviale ? c-a-d est-ce qu'il y a une TM dans Three et une TM en dehors de Three ? Oui, une machine qui accepte tout, et une machine qui accepte qu'un mot. ✅
+
+#### Semi-decidability ("recognisable")
+
+On dit qu'un problème est semi-décidable s'il renvoie **YES** pour les mots dans son langage, et **NO ou loop forever**, pour les autres. 
+
+#### Co-semi-decidability
+
+L'inverse (renvoie **NO** tout le temps et **YES ou loop forever**).
+
+> [!tip]
+> If a problem P is semi-decidable then its complement P is co-semi-decidable, and vice versa.
+
+#### Ensembles énumérables
+
+> [!note]
+> A set S is enumerable if there is a bijection between S and N.
+
+**A set S is called computably enumerable if the enumeration function $f : N → S$ is computable.**
+
+> [!example]
+> 
+> - _Décidable_ = on peut dire “oui” ou “non” à coup sûr
+> - _Énumérable_ = on peut trouver tous les “oui”, mais jamais être sûr pour les “non”.
+> 
+> Imaginons que tu puisses exécuter **tous les programmes possibles sur toutes les entrées possibles**, **en parallèle** (un peu comme si tu avais une infinité de processeurs).  
+> Tu les fais tourner chacun _étape par étape_ (méthode dite du « _tressage_ » ou _dovetailing_). À chaque fois qu’un programme $(M_i)$, sur une entrée $(x_j)$, **s’arrête**, tu notes le couple $(\langle M_i, x_j \rangle)$. Ton programme d’énumération afficherait alors une suite infinie.
+
 
