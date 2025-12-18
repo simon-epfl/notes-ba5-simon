@@ -1,0 +1,17 @@
+SELECT
+  C.title,
+  C.author,
+  (
+  	SELECT COUNT(*)
+   	FROM Loans L
+   	JOIN Copies CCount ON CCount.copy_id = L.copy
+   	WHERE CCount.title = C.title AND CCount.author = C.author
+  ),
+  CAST((
+  		SELECT AVG(R.date - L.start)
+        FROM Copies CAvg
+        JOIN Loans L ON CAvg.copy_id = L.copy 
+        JOIN Returns R ON L.loan_id = R.loan
+        WHERE CAvg.title = C.title AND CAvg.author = C.author
+   ) AS DECIMAL(10, 1))
+FROM (SELECT DISTINCT title, author FROM Copies) C;

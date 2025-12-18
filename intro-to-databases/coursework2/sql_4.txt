@@ -1,0 +1,18 @@
+select 
+	G.genre,
+	G.subgenre,
+	(
+		select COUNT(distinct Cu.cust_id)
+		from customers Cu
+		join Loans L on L.customer = Cu.cust_id
+		join Copies Co on Co.copy_id = L."copy"
+		join Books Bo on Bo.title = Co.title and Bo.author = Co.author
+		where Bo.genre = G.genre and Bo.subgenre = G.subgenre
+	) as customers_count,
+	(
+		select COUNT(*)
+		from copies Co
+		join Books Bo on Bo.title = Co.title and Bo.author = Co.author
+		where Bo.genre = G.genre and Bo.subgenre = G.subgenre
+	) as copies_available_count
+from (select distinct genre, subgenre from books) G;

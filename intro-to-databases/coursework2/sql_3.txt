@@ -1,0 +1,15 @@
+select
+	B.branch,
+	(
+		select COUNT(*)
+		from (select distinct title, author, branch from Copies) C
+		where B.branch = C.branch
+	) as copies,
+	(
+		select COUNT(*)
+		from customers C
+		where B.branch = C.branch
+	) as customers
+from (
+	select branch from customers union select branch from copies
+) B;

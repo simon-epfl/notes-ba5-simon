@@ -1,0 +1,53 @@
+(
+    <P>[last_loan, customer, title, author](
+        <R>[date_1->last_loan,customer_1->customer, title_1->title, author_1->author](
+            <S>[~(loan_id_1 = loan_id_2) & title_1 = title_2 & author_1 = author_2 & customer_1 = customer_2](
+                <R>[loan_id->loan_id_1,title->title_1,author->author_1,customer->customer_1,start->date_1](
+                    <P>[loan_id,title,author,customer, start](
+                        <S>[copy_id=copy](
+                            Loans
+                            <X>
+                            Copies
+                        )
+                    )
+                )
+                <X>
+                <R>[loan_id->loan_id_2,title->title_2,author->author_2,customer->customer_2,start->date_2](
+                    <P>[loan_id,title,author,customer, start](
+                        <S>[copy_id=copy](
+                            Loans
+                            <X>
+                            Copies
+                        )
+                    )
+                )
+            )
+
+            <D>
+
+            <S>[date_1 < date_2](
+                <S>[~(loan_id_1 = loan_id_2) & title_1 = title_2 & author_1 = author_2 & customer_1 = customer_2](
+                    <R>[loan_id->loan_id_1,title->title_1,author->author_1,customer->customer_1,start->date_1](
+                        <P>[loan_id,title,author,customer, start](
+                            <S>[copy_id=copy](
+                                Loans
+                                <X>
+                                Copies
+                            )
+                        )
+                    )
+                    <X>
+                    <R>[loan_id->loan_id_2,title->title_2,author->author_2,customer->customer_2,start->date_2](
+                        <P>[loan_id,title,author,customer, start](
+                            <S>[copy_id=copy](
+                                Loans
+                                <X>
+                                Copies
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)

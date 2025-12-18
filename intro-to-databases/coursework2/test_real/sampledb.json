@@ -1,0 +1,101 @@
+{
+    "tables": {
+        "Loans": {
+            "attributes": {
+                "loan_id": {
+                    "type": "STRING"
+                },
+                "copy": {
+                    "type": "STRING"
+                },
+                "customer": {
+                    "type": "STRING"
+                },
+                "start": {
+                    "type": "STRING"
+                },
+                "due": {
+                    "type": "STRING"
+                }
+            },
+            "datafile": "/Users/poca/Documents/cw-2-db/sampledb_data/loans.csv"
+        },
+        "Returns": {
+            "attributes": {
+                "loan": {
+                    "type": "STRING"
+                },
+                "date": {
+                    "type": "STRING"
+                }
+            },
+            "datafile": "/Users/poca/Documents/cw-2-db/sampledb_data/returns.csv"
+        },
+        "Customers": {
+            "attributes": {
+                "cust_id": {
+                    "type": "STRING"
+                },
+                "name": {
+                    "type": "STRING"
+                },
+                "branch": {
+                    "type": "STRING"
+                }
+            },
+            "datafile": "/Users/poca/Documents/cw-2-db/sampledb_data/customers.csv"
+        },
+        "Copies": {
+            "attributes": {
+                "copy_id": {
+                    "type": "STRING"
+                },
+                "title": {
+                    "type": "STRING"
+                },
+                "author": {
+                    "type": "STRING"
+                },
+                "branch": {
+                    "type": "STRING"
+                }
+            },
+            "datafile": "/Users/poca/Documents/cw-2-db/sampledb_data/copies.csv"
+        },
+        "Books": {
+            "attributes": {
+                "title": {
+                    "type": "STRING"
+                },
+                "author": {
+                    "type": "STRING"
+                },
+                "genre": {
+                    "type": "STRING"
+                },
+                "subgenre": {
+                    "type": "STRING"
+                }
+            },
+            "datafile": "/Users/poca/Documents/cw-2-db/sampledb_data/books.csv"
+        },
+        "Holds": {
+            "attributes": {
+                "customer": {
+                    "type": "STRING"
+                },
+                "title": {
+                    "type": "STRING"
+                },
+                "author": {
+                    "type": "STRING"
+                },
+                "queue": {
+                    "type": "STRING"
+                }
+            },
+            "datafile": "/Users/poca/Documents/cw-2-db/sampledb_data/holds.csv"
+        }
+    },
+    "views": {}
+}

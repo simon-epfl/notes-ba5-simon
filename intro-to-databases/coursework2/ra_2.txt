@@ -1,0 +1,51 @@
+<E>(
+    <P>[cust_id,name](
+        <S>[cust_id=n_cust_id](
+            <R>[cust_id->n_cust_id](Customers)
+            <X>
+            (
+                (
+                    <P>[cust_id](Customers)
+                    <D>
+                    (
+                        <P>[cust_id](
+                            <S>[due < date](
+                                <S>[loan = loan_id](
+                                    <S>[cust_id = customer](
+                                        Customers <X> Loans
+                                    )
+                                    <X>
+                                    Returns
+                                )
+                            )
+                        )
+                        <U>
+                        <P>[cust_id](
+                            <P>[cust_id, loan_id](
+                                <R>[customer->cust_id](
+                                    Loans
+                                )
+                            )
+                            <D>
+                            <P>[loan_id, cust_id](
+                                <S>[loan = loan_id](
+                                    <S>[cust_id = customer](
+                                        Customers <X> Loans
+                                    )
+                                    <X>
+                                    Returns
+                                )
+                            )
+                        )
+                    )
+                )
+                <I>
+                (
+                    <P>[cust_id](
+                        <R>[customer->cust_id](Loans)
+                    )
+                )
+            )
+        )
+    )
+)

@@ -1,0 +1,45 @@
+<R>[title_copy->title,author_copy->author](
+    <P>[title_copy,author_copy,cust_id,branch](
+        <S>[cust_id=customer & branch=branch_copy](
+            Customers
+            <X>
+            <S>[title_hold=title_copy & author_hold=author_copy](
+                <R>[author->author_copy,title->title_copy,branch->branch_copy](
+                    Copies
+                    <D>
+                    <P>[copy_id,author,title,branch](
+                        <S>[copy_id=copy](
+                            Copies
+                            <X>
+                            <S>[loan_id=n_loan_id](
+                                <R>[loan_id->n_loan_id](Loans)
+                                <X>
+                                (
+                                    <P>[loan_id](Loans)
+                                    <D>
+                                    <P>[loan_id](
+                                        <R>[loan->loan_id](Returns)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+                <X>
+                <R>[title->title_hold,author->author_hold](
+                    Holds
+                    <D>
+                    <R>[title_1->title,author_1->author,queue_1->queue,customer_1->customer](
+                        <P>[title_1,author_1,queue_1,customer_1](
+                            <S>[title_1=title_2 & author_1=author_2 & queue_2 < queue_1](
+                                <R>[customer->customer_1,title->title_1,author->author_1,queue->queue_1](Holds)
+                                <X>
+                                <R>[customer->customer_2,title->title_2,author->author_2,queue->queue_2](Holds)
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)

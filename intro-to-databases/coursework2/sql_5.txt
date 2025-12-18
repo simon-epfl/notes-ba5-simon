@@ -1,0 +1,22 @@
+select D.cust_id, MAX(L."start") from
+(
+	select distinct(customer) as cust_id
+	from Loans
+	except
+	(
+		select L1.customer as cust_id
+		from Loans L1
+		join Loans L2 on L1.customer = L2.customer
+		join Returns R on R.loan = L1.loan_id 
+		where L1."start" <= L2."start" and L2."start" < R."date" and L1.loan_id != L2.loan_id 
+		union
+		select L1.customer as cust_id
+		from Loans L1
+		join Loans L2 on L1.customer = L2.customer
+		where L1."start" <= L2."start" and L1.loan_id != L2.loan_id  and L1.loan_id not in (
+			select loan from Returns R
+		)
+	)
+) D
+join Loans L on L.customer = D.cust_id
+group by D.cust_id;

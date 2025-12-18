@@ -1,0 +1,34 @@
+SELECT
+   C.cust_id,
+   (
+      SELECT total - returned_ontime - returned_late
+      FROM (
+         select
+         (
+            SELECT COUNT(*)
+            FROM loans L JOIN "returns" R on R.loan = L.loan_id
+            where L.customer = C.cust_id and L.due >= R."date" 
+         ) as returned_ontime,
+         (
+            SELECT COUNT(*)
+            FROM loans L JOIN "returns" R on R.loan = L.loan_id
+            where L.customer = C.cust_id and L.due < R."date" 
+         ) as returned_late,
+         (
+            SELECT COUNT(*)
+            FROM loans L
+            where L.customer = C.cust_id
+         ) as total
+		)
+  	) as not_yet_returned,
+   ( 
+      SELECT COUNT(*)
+      FROM loans L JOIN "returns" R on R.loan = L.loan_id
+      where L.customer = C.cust_id and L.due >= R."date" 
+   ) as returned_ontime,
+   (
+      SELECT COUNT(*)
+      FROM loans L JOIN "returns" R on R.loan = L.loan_id
+      where L.customer = C.cust_id and L.due < R."date" 
+   ) as returned_late
+FROM Customers C;

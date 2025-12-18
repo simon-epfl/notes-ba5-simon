@@ -1,0 +1,28 @@
+<E>(
+    <P>[customer, branch](
+        <S>[cust_id=customer](
+            <R>[cust_id->customer](Customers)
+            <X>
+            (
+                <P>[cust_id](
+                    <P>[cust_id,branch](Customers)
+                    <D> (
+                        <P>[cust_id,branch](
+                            <S>[branch=branch_copy & loan_customer_id=cust_id & loan_copy_id=copy_id](
+                                Customers
+                                <X>
+                                <R>[customer->loan_customer_id, copy->loan_copy_id](Loans)
+                                <X>
+                                <R>[branch->branch_copy](Copies)
+                            )
+                        )
+                    )
+                )
+                <I>
+                <P>[cust_id](
+                    <R>[customer->cust_id](Loans)
+                )
+            )
+        )
+    )
+)

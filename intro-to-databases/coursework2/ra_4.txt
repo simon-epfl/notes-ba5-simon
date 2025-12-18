@@ -1,0 +1,75 @@
+<E>(
+    <P>[title, author, branch](
+        Copies <D> <P>[copy_id,author,title,branch](
+            <S>[copy=copy_id](
+                <S>[loan=loan_id](
+                    (
+                        <P>[loan](
+                            <R>[loan_id->loan](Loans)
+                        )
+                        <D>
+                        <P>[loan](Returns)
+                    ) 
+                    <X> Loans
+                )
+                <X> Copies
+            )
+        )
+    )
+)
+<D>
+<R>[t2->title, a2->author, b2->branch](
+    <P>[t2,a2,b2](
+        <S>[title=t2 & author=a2](
+            <R>[title->t2, author->a2, branch->b2](
+                <E>(
+                    <P>[title, author, branch](
+                        Copies <D> <P>[copy_id,author,title,branch](
+                            <S>[copy=copy_id](
+                                <S>[loan=loan_id](
+                                    (
+                                        <P>[loan](
+                                            <R>[loan_id->loan](Loans)
+                                        )
+                                        <D>
+                                        <P>[loan](Returns)
+                                    ) 
+                                    <X> Loans
+                                )
+                                <X> Copies
+                            )
+                        )
+                    )
+                )
+            )
+            <X>
+            <E>(
+                <P>[title,author](
+                    <E>(
+                        <P>[title,author,branch](Copies)
+                    )
+                    <D>
+                    <E>(
+                        <P>[title, author, branch](
+                            Copies <D> <P>[copy_id,author,title,branch](
+                                <S>[copy=copy_id](
+                                    <S>[loan=loan_id](
+                                        (
+                                            <P>[loan](
+                                                <R>[loan_id->loan](Loans)
+                                            )
+                                            <D>
+                                            <P>[loan](Returns)
+                                        ) 
+                                        <X> Loans
+                                    )
+                                    <X> Copies
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
